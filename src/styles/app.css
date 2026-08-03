@@ -1,0 +1,480 @@
+/* Styled to match penguinrandomhouse.com/the-read-down 1:1 — layout, type scale,
+   colors, and the signature orange-outlined "Add to Cart" button.
+
+   PRH's brand typefaces are Fort (body) and Shift (display). They can't be
+   hotlinked (no CORS header on their CDN), so the @font-face rules below point at
+   local files in /public/fonts/. Until those files are added, everything falls
+   back to Helvetica Neue / Arial — exactly PRH's own fallback stack. Drop the
+   woff2 files into public/fonts/ to make it pixel-perfect. */
+
+@font-face { font-family: 'Fort-Book';        src: url('/fonts/Fort-Book.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Fort-Book-Italic';  src: url('/fonts/Fort-BookItalic.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Fort-Medium';      src: url('/fonts/Fort-Medium.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Shift-Book';        src: url('/fonts/Shift-Book.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Shift-Book-Italic'; src: url('/fonts/Shift-BookItalic.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Shift-Medium';      src: url('/fonts/Shift-Medium.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Shift-Medium-Italic'; src: url('/fonts/Shift-MediumItalic.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Shift-Bold-Italic'; src: url('/fonts/Shift-BoldItalic.woff2') format('woff2'); font-display: swap; }
+
+:root {
+  --fort: 'Fort-Book', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --fort-italic: 'Fort-Book-Italic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --fort-med: 'Fort-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --shift: 'Shift-Book', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --shift-italic: 'Shift-Book-Italic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --shift-med: 'Shift-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --shift-med-italic: 'Shift-Medium-Italic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --shift-bold-italic: 'Shift-Bold-Italic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --orange: #fa6400;
+  --ink: #333;
+  --ink-strong: #222;
+  --rule: #e6e6e6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--fort);
+  font-size: 16px;
+  line-height: 1.43;
+  overflow-x: hidden; /* the full-bleed 100vw banner must not create a scrollbar */
+}
+
+.app {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* p5 stamps inline width/height on the canvas — keep it inside its container. */
+.poster-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* ---------- Create screen ---------- */
+.create-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.headline {
+  font-family: var(--shift);
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.15;
+  color: var(--ink-strong);
+  margin: 0 0 16px;
+}
+
+.subhead {
+  font-family: var(--fort);
+  font-size: 18px;
+  color: var(--ink);
+  margin: 0 0 26px;
+}
+
+.prompt-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.prompt-input {
+  width: 100%;
+  font-family: var(--fort);
+  font-size: 18px;
+  color: var(--ink);
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 0;
+}
+
+.prompt-input:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.examples-label {
+  font-family: var(--fort);
+  font-size: 14px;
+  color: #767676;
+}
+
+.chip {
+  font-family: var(--fort);
+  font-size: 14px;
+  color: #000;
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  padding: 6px 11px;
+  cursor: pointer;
+}
+
+.chip:hover:not(:disabled) { border-color: var(--orange); }
+.chip:disabled { opacity: 0.5; cursor: default; }
+
+/* ---------- Shared buttons ---------- */
+/* PRH's CTA: transparent fill, thick square orange outline, uppercase black. */
+.btn-primary,
+.btn-cart {
+  display: inline-block;
+  font-family: var(--fort-med);
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #000;
+  background: transparent;
+  border: 4px solid var(--orange);
+  border-radius: 0;
+  padding: 9px 18px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.btn-primary:hover:not(:disabled),
+.btn-cart:hover {
+  background: var(--orange);
+  color: #fff;
+}
+
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-ghost {
+  font-family: var(--fort-med);
+  font-size: 15px;
+  color: var(--ink);
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 9px 4px;
+}
+
+.btn-ghost:hover { color: var(--orange); }
+
+/* ---------- List view (Read Down article) ---------- */
+/* Full-bleed generative header image — the Read Down banner (2000x380). */
+.rd-hero {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: -40px; /* cancel .app padding-top so the banner sits flush at the top */
+  line-height: 0;
+}
+
+.poster-wrap {
+  width: 100%;
+  aspect-ratio: 2000 / 380;
+  overflow: hidden;
+}
+
+/* White title card overlapping the banner — the PRH Read Down pattern. */
+.rd-header {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  max-width: 820px;
+  margin: -150px auto 0;
+  padding: 46px 56px 40px;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.09);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+}
+
+/* "The ReadDown" with the orange underline. */
+.eyebrow-mark {
+  display: inline-block;
+  font-family: var(--fort-med);
+  font-size: 16px;
+  color: var(--ink);
+  border-bottom: 2px solid var(--orange);
+  padding-bottom: 6px;
+}
+
+.list-title {
+  font-family: var(--shift);
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 1.2;
+  color: var(--ink-strong);
+  margin: 0 0 16px;
+}
+
+.rd-byline {
+  font-family: var(--fort);
+  font-size: 16px;
+  color: var(--ink);
+  margin: 0 0 18px;
+}
+
+.rd-byline strong { font-family: var(--fort-med); font-weight: 500; }
+.rd-sep { color: #ccc; margin: 0 10px; }
+
+.rd-intro {
+  font-family: var(--fort-med);
+  font-size: 18px;
+  line-height: 1.35;
+  color: #51689a;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.list-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 26px auto 0;
+}
+
+.rd-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Each book is a card with a top region (text + cover) and a bottom region
+   (buy). A hairline divides them, matching the PRH Read Down book card. */
+.prh-card {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* --- top region: text left, cover + bookshelf right --- */
+.prh-card-top {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.prh-card-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.prh-card-aside {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.prh-card-cover {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+.prh-card-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Glossy sheen near the spine — makes a flat cover read as a physical book. */
+.prh-card-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0 8px 8px 0;
+  background: linear-gradient(
+    90deg,
+    rgba(142, 142, 142, 0) 2%,
+    rgba(244, 244, 244, 0.2) 3%,
+    rgba(142, 142, 142, 0) 4%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.bookshelf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fort);
+  font-size: 18px;
+  color: var(--ink);
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 14px;
+  cursor: pointer;
+}
+
+.bookshelf-icon { display: block; flex: 0 0 auto; }
+.bookshelf-btn:hover { color: var(--orange); }
+.bookshelf-btn.is-saved { color: var(--orange); }
+
+.prh-title {
+  font-family: var(--shift-italic);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.3;
+  margin: 0 0 4px;
+}
+
+.prh-title a { color: var(--ink); text-decoration: none; }
+.prh-title a:hover { color: var(--orange); }
+
+.prh-author {
+  font-family: var(--shift-med);
+  font-size: 22px;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+
+.author-link { color: var(--ink); text-decoration: underline; }
+.author-link:hover { color: var(--orange); }
+
+.prh-why {
+  font-family: var(--fort-italic);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.prh-desc {
+  font-family: var(--fort);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* --- divider --- */
+.prh-card-rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 28px 0;
+}
+
+/* --- bottom region: format/price + cart (left), retailers (right) --- */
+.prh-card-bottom {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.prh-buy-left {
+  flex: 0 0 auto;
+}
+
+.prh-format {
+  font-size: 18px;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+
+.prh-format .fmt { font-family: var(--shift-italic); font-style: italic; }
+.prh-format .price { font-family: var(--shift-bold-italic); font-style: italic; font-weight: 500; }
+
+.prh-buy-right {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.retailers-label {
+  font-family: var(--shift-med-italic);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+
+.retailer-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Gray square chips — PRH's retailer buttons. */
+.retailer-btn {
+  display: inline-block;
+  background: #f0f0f0;
+  color: #000;
+  font-family: var(--fort-med);
+  font-size: 16px;
+  padding: 10px 16px;
+  text-decoration: none;
+}
+
+.retailer-btn:hover { background: #e4e4e4; }
+
+.disclaimer {
+  font-family: var(--fort);
+  font-size: 13px;
+  color: #767676;
+  max-width: 640px;
+  margin: 30px auto 0;
+  text-align: center;
+}
+
+.error-banner {
+  font-family: var(--fort);
+  color: #b00;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.app-footer {
+  font-family: var(--fort);
+  font-size: 13px;
+  color: #767676;
+  text-align: center;
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 700px) {
+  .headline { font-size: 30px; }
+  .list-title { font-size: 32px; }
+  .rd-header {
+    margin-top: -48px;
+    padding: 28px 24px 30px;
+  }
+  .rd-intro { font-size: 16px; }
+  .prh-title { font-size: 26px; }
+  .prh-author { font-size: 19px; }
+  /* Stack the top region (cover above text) and the bottom region on narrow screens. */
+  .prh-card-top {
+    flex-direction: column-reverse;
+    gap: 18px;
+  }
+  .prh-card-aside {
+    flex-basis: auto;
+    align-items: flex-start;
+    width: 160px;
+  }
+  .prh-card-bottom {
+    flex-direction: column;
+    gap: 22px;
+  }
+}
