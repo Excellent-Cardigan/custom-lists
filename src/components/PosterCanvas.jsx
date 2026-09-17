@@ -1,7 +1,7 @@
 import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import p5 from 'p5';
 import { seedFromPrompt } from '../art/seed.js';
-import { paletteFromSeed } from '../art/palette.js';
+import { paletteFromSeasonPool, currentSeason } from '../art/palette.js';
 import { createPosterSketch } from '../art/poster.js';
 
 // Mounts the seeded p5 poster. Everything is derived from the prompt, so the same
@@ -13,7 +13,7 @@ const PosterCanvas = forwardRef(function PosterCanvas({ prompt, meta, size }, re
   useEffect(() => {
     if (!holder.current) return undefined;
     const seed = seedFromPrompt(prompt);
-    const palette = paletteFromSeed(seed);
+    const palette = paletteFromSeasonPool(currentSeason(), seed);
     const sketch = createPosterSketch({ seed, palette, meta, size });
     instance.current = new p5(sketch, holder.current);
     return () => {

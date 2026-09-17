@@ -1,0 +1,105 @@
+{
+  "label": "Winter 2025/26",
+  "year": "2025-26",
+  "genres": {
+    "mystery-thriller": {
+      "label": "Mystery & Thriller",
+      "colors": [
+        "#019FDB",
+        "#017FAF",
+        "#2FBCF2",
+        "#003B52"
+      ]
+    },
+    "historical-fiction": {
+      "label": "Historical Fiction",
+      "colors": [
+        "#AA4E99",
+        "#6B155B",
+        "#842472",
+        "#2C0324"
+      ]
+    },
+    "biographies-memoirs": {
+      "label": "Biographies & Memoirs",
+      "colors": [
+        "#A2E5E9",
+        "#3AABB1",
+        "#006D77",
+        "#002B35"
+      ]
+    },
+    "fiction": {
+      "label": "Fiction",
+      "colors": [
+        "#BDB300",
+        "#DBD000",
+        "#FCF56F",
+        "#F2E600"
+      ]
+    },
+    "book-club": {
+      "label": "Book Club",
+      "colors": [
+        "#39163B",
+        "#BE6FC2",
+        "#7A297B",
+        "#5C235C"
+      ]
+    },
+    "nonfiction": {
+      "label": "Nonfiction",
+      "colors": [
+        "#5D7426",
+        "#36480B",
+        "#9EB860",
+        "#212C07"
+      ]
+    },
+    "womens-fiction": {
+      "label": "Women's Fiction",
+      "colors": [
+        "#F0FCFF",
+        "#CAE8FC",
+        "#65ABFC",
+        "#2264B5"
+      ]
+    },
+    "romance": {
+      "label": "Romance",
+      "colors": [
+        "#FBCDD2",
+        "#FF999E",
+        "#820B10",
+        "#6C0102"
+      ]
+    },
+    "science-fiction-fantasy": {
+      "label": "Science Fiction & Fantasy",
+      "colors": [
+        "#7666F0",
+        "#4023C0",
+        "#331991",
+        "#0F002E"
+      ]
+    },
+    "kids-young-adult": {
+      "label": "Kids' & Young Adult",
+      "colors": [
+        "#00421C",
+        "#005B27",
+        "#0F7B3E",
+        "#50C786"
+      ]
+    },
+    "new-books-every-genre": {
+      "label": "New Books in Every Genre",
+      "colors": [
+        "#701C00",
+        "#BB3103",
+        "#F24911",
+        "#FF8056"
+      ]
+    }
+  }
+}

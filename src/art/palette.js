@@ -3,6 +3,11 @@
 // so every list feels distinct but the family always reads as one system.
 
 import { mulberry32, makeRandom } from './seed.js';
+import fall from '../data/seasons/fall.json';
+import summer from '../data/seasons/summer.json';
+import winter from '../data/seasons/winter.json';
+
+const SEASONS = { fall, summer, winter };
 
 // Warm anchor hues (in degrees) we allow the base to land near.
 // Ambers, ochres, rusts, terracotta, oxblood, warm rose.
@@ -63,6 +68,69 @@ export function paletteFromSeed(seed, opts = {}) {
     accent,
     // Grain strength leans heavier on dusk for a filmic feel.
     grain: mood === 'dusk' ? r.range(0.06, 0.12) : r.range(0.04, 0.08),
+    ...opts,
+  };
+}
+
+// PRH's real seasonal/genre brand colors (Fall 26, Summer 26, Winter 2025/26),
+// sourced from the "Coming Soon" Figma file. Each genre has 4 flat colors;
+// some seasons don't cover every genre (e.g. Winter has no literary-fiction),
+// so we fall back to "fiction" rather than fake a value.
+export function paletteFromSeasonGenre(season, genre, opts = {}) {
+  const seasonData = SEASONS[season];
+  const entry = seasonData?.genres[genre] ?? seasonData?.genres['fiction'];
+  if (!entry) return null;
+
+  const [background, m1, m2, accent] = entry.colors;
+
+  return {
+    mood: 'paper',
+    background,
+    ink: accent,
+    marks: [m1, m2, accent],
+    glow: m2,
+    accent,
+    grain: 0.08,
+    ...opts,
+  };
+}
+
+// Fall = Sep-Nov, Winter = Dec-Feb, Summer = Mar-Aug (the seasonal data has no
+// "spring" set, so summer's colors cover the spring gap too).
+export function currentSeason(date = new Date()) {
+  const month = date.getMonth(); // 0-11
+  if (month >= 8 && month <= 10) return 'fall'; // Sep, Oct, Nov
+  if (month === 11 || month <= 1) return 'winter'; // Dec, Jan, Feb
+  return 'summer'; // Mar-Aug
+}
+
+// Pools every genre's 4 colors for a season into one list, then seed-picks 4 of
+// them (deterministic per seed, so shareable links stay reproducible) to build
+// a palette. This is genre-agnostic — it's meant to represent "the season," not
+// any one book category.
+export function paletteFromSeasonPool(season, seed, opts = {}) {
+  const seasonData = SEASONS[season];
+  if (!seasonData) return null;
+
+  const pool = Object.values(seasonData.genres).flatMap((g) => g.colors);
+  const r = makeRandom(mulberry32(seed ^ 0x51ed270b));
+
+  const remaining = [...pool];
+  const picks = [];
+  for (let i = 0; i < 4; i++) {
+    const index = r.int(0, remaining.length - 1);
+    picks.push(remaining.splice(index, 1)[0]);
+  }
+  const [background, m1, m2, accent] = picks;
+
+  return {
+    mood: 'paper',
+    background,
+    ink: accent,
+    marks: [m1, m2, accent],
+    glow: m2,
+    accent,
+    grain: 0.08,
     ...opts,
   };
 }

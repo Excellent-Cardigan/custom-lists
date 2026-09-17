@@ -1,0 +1,114 @@
+{
+  "label": "Fall 26",
+  "year": "2026",
+  "genres": {
+    "mystery-thriller": {
+      "label": "Mystery & Thriller",
+      "colors": [
+        "#FCEC3A",
+        "#BE6FC2",
+        "#A80009",
+        "#CF212A"
+      ]
+    },
+    "historical-fiction": {
+      "label": "Historical Fiction",
+      "colors": [
+        "#D95600",
+        "#DB9E00",
+        "#9EB860",
+        "#005761"
+      ]
+    },
+    "biographies-memoirs": {
+      "label": "Biographies & Memoirs",
+      "colors": [
+        "#FFAC93",
+        "#C5BFB6",
+        "#768F3A",
+        "#CF212A"
+      ]
+    },
+    "fiction": {
+      "label": "Fiction",
+      "colors": [
+        "#FFAC93",
+        "#FF8056",
+        "#756F66",
+        "#E5DFD6"
+      ]
+    },
+    "literary-fiction": {
+      "label": "Literary Fiction",
+      "colors": [
+        "#CCC200",
+        "#C5BFB6",
+        "#FCEC3A",
+        "#FF8FB8"
+      ]
+    },
+    "book-club": {
+      "label": "Book Club",
+      "colors": [
+        "#FA6400",
+        "#FCAB38",
+        "#FF8FB8",
+        "#A80009"
+      ]
+    },
+    "nonfiction": {
+      "label": "Nonfiction",
+      "colors": [
+        "#FF8056",
+        "#7666F0",
+        "#FF8FB8",
+        "#750029"
+      ]
+    },
+    "womens-fiction": {
+      "label": "Women's Fiction",
+      "colors": [
+        "#FA7721",
+        "#FA6400",
+        "#CCC200",
+        "#4F001D"
+      ]
+    },
+    "romance": {
+      "label": "Romance",
+      "colors": [
+        "#F24911",
+        "#950036",
+        "#CF212A",
+        "#E85D64"
+      ]
+    },
+    "science-fiction-fantasy": {
+      "label": "Science Fiction & Fantasy",
+      "colors": [
+        "#B0E99B",
+        "#94E3B7",
+        "#3AABB1",
+        "#573DE8"
+      ]
+    },
+    "kids-young-adult": {
+      "label": "Kids' & Young Adult",
+      "colors": [
+        "#FFB702",
+        "#098F9B",
+        "#006D77",
+        "#E85D64"
+      ]
+    },
+    "new-books-every-genre": {
+      "label": "New Books in Every Genre",
+      "colors": [
+        "#FCAB38",
+        "#DB9E00",
+        "#F24911",
+        "#FA7721"
+      ]
+    }
+  }
+}
